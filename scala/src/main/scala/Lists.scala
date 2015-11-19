@@ -1,3 +1,5 @@
+package org.hackwithlambda.problems
+
 /*
  * 99 Problems, 1-28.
  * Lists
