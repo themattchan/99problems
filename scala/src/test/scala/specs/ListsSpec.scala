@@ -1,4 +1,4 @@
-package org.hackwithlambda.problems
+package specs
 
 import org.scalacheck.Properties
 import org.scalacheck.Prop.forAll

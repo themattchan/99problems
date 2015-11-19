@@ -1,4 +1,4 @@
-package org.hackwithlambda.problems
+package problems
 
 /*
  * 99 Problems, 1-28.
