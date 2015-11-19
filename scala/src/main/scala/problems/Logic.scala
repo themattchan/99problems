@@ -28,7 +28,7 @@ object Logic46 {
 
   def nand (a: Bool, b: Bool) = not(and(a,b))
   def nor  (a: Bool, b: Bool) = not(or(a,b))
-  def equ  (a: Bool, b: Bool) = or(and(a,b), and(not(a),not(b)))
+  def equ  (a: Bool, b: Bool) = or(and(a,b), not(or(a,b)))
   def xor  (a: Bool, b: Bool) = not(equ(a,b))
   def impl (a: Bool, b: Bool) = not(and(a,not(b)))
 
