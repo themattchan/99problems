@@ -23,8 +23,11 @@ object Lists {
   }
 
   def nth[A](n: Int, xs: List[A]): A =
-    if (n == 0) { xs.head }
-    else { nth(n-1, xs.tail) }
+    if (n < 0) throw new IndexOutOfBoundsException()
+    else xs match {
+      case Nil => throw new Exception("empty")
+      case x::xs => if (n == 0) x else nth(n-1, xs)
+    }
 
   def length[A](xs: List[A]): Int = xs match {
     case Nil => 0
@@ -65,7 +68,7 @@ object Lists {
   }
 
   def pack[A](xs: List[A]): List[List[A]] = {
-    def go[A](acc: List[A], xs: List[A]): List[List[A]] = xs match {
+    def go[A](acc: List[List[A]], xs: List[A]): List[List[A]] = xs match {
       case Nil => reverse(acc)
       case h::t =>
         if (h == acc.head.head) {

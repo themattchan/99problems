@@ -28,7 +28,7 @@ object Arithmetic {
   def primeFactors(n: Int): List[Int] = ???
 
   // 36.  Find prime factors of a given positive integer and their multiplicity.
-  def primeFactorsMult(n: Int): List[(Int,Int)] = ??
+  def primeFactorsMult(n: Int): List[(Int,Int)] = ???
 
   // 37. Totient function, take 2.
   //
