@@ -100,4 +100,15 @@ object Lists {
   def duplicateN[A](n: Int, xs: List[A]) =
     xs flatMap (replicate(_,n))
 
+  def drop[A](n: Int, xs: List[A]) = ???
+
+  def split[A](n: Int, xs: List[A]) = ???
+
+  def slice[A](n: Int, m: Int, xs: List[A]) = ???
+
+  def rotate[A](n: Int, xs: List[A]) = {
+    val n = if (n < 0) xs.length + n else n
+    val (l,r) = split(n,xs)
+    r++l
+  }
 }
