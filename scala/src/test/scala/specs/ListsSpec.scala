@@ -48,8 +48,8 @@ object ListsSpec extends Properties("List") {
   }
 
   property("pack") = forAll { l: List[Int] =>
-    l == flatten(pack(l))
+    l == pack(l).flatten
   }
 
-  property("encode") =  ???
+//  property("encode") =  ???
 }

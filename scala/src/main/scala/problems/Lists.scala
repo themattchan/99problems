@@ -71,13 +71,12 @@ object Lists {
   }
 
   def pack[A](xs: List[A]) = {
-    def group[A](acc: List[List[A]], xs: List[A]): List[List[A]] = xs match {
-      case Nil => reverse(acc)
+    def group[A](x: A, acc: List[List[A]]) = acc match {
+      case Nil => List(x) :: acc
       case h::t =>
-        if (h == acc.head.head) {
-          go ((h::acc.head)::acc.tail, t)
-        } else {
-          go (List(h)::acc,t)
+        h match {
+          case h1::_ => if (h1 == x) (x::h)::t else List(x) :: acc
+          case _ => throw new Exception("empty inner list, unreachable")
         }
     }
 
@@ -85,16 +84,11 @@ object Lists {
   }
 
   def encode[A](xs: List[A]) = {
-    def add (e: A, a: List[(Int,A)]) = a match {
-      case Nil => (1,e)::a
-      case (n,v)::as => if (v == e) (n+1,v)::as else (1,e)::a
-    }
-
-    xs.foldRight(List[(Int,A)]())(add)
+    pack(xs) map { g => (g.length, g.head) }
   }
 
   def encodeModified[A](xs: List[A]) = {
-    encode(xs) map { (n,c) => if (n == 1) c else (n,c) }
+    encode(xs) map { case (n,c) => if (n == 1) c else (n,c) }
   }
 
 }
