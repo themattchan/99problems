@@ -73,11 +73,7 @@ object Lists {
   def pack[A](xs: List[A]) = {
     def group[A](x: A, acc: List[List[A]]) = acc match {
       case Nil => List(x) :: acc
-      case h::t =>
-        h match {
-          case h1::_ => if (h1 == x) (x::h)::t else List(x) :: acc
-          case _ => throw new Exception("empty inner list, unreachable")
-        }
+      case h::t => if (h.head == x) (x::h)::t else List(x) :: acc
     }
 
     xs.foldRight(List[List[A]]())(group)
