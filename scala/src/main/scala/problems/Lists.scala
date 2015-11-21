@@ -71,7 +71,7 @@ object Lists {
   }
 
   def pack[A](xs: List[A]) = {
-    def go[A](acc: List[List[A]], xs: List[A]): List[List[A]] = xs match {
+    def group[A](acc: List[List[A]], xs: List[A]): List[List[A]] = xs match {
       case Nil => reverse(acc)
       case h::t =>
         if (h == acc.head.head) {
@@ -80,7 +80,8 @@ object Lists {
           go (List(h)::acc,t)
         }
     }
-    go (List(),xs)
+
+    xs.foldRight(List[List[A]]())(group)
   }
 
   def encode[A](xs: List[A]) = {
@@ -91,4 +92,9 @@ object Lists {
 
     xs.foldRight(List[(Int,A)]())(add)
   }
+
+  def encodeModified[A](xs: List[A]) = {
+    encode(xs) map { (n,c) => if (n == 1) c else (n,c) }
+  }
+
 }
