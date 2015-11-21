@@ -34,7 +34,7 @@ object Lists {
     case h::t => 1 + length(t)
   }
 
-  def reverse[A](xs: List[A]): List[A] = {
+  def reverse[A](xs: List[A]) = {
     def go[A](acc: List[A], xs: List[A]): List[A] = xs match {
       case Nil => acc
       case h::t => go (h::acc, t)
@@ -45,7 +45,7 @@ object Lists {
   def isPalindrome[A](xs: List[A]): Boolean =
     xs == reverse(xs)
 
-  def flatten[A](xss: List[List[A]]): List[A] = {
+  def flatten[A](xss: List[List[A]]) = {
     def addAll[A](toAdd: List[A], acc: List[A]): List[A] = toAdd match {
       case Nil => acc
       case h::t => addAll(t, h::acc)
@@ -59,7 +59,7 @@ object Lists {
     go (List(), xss)
   }
 
-  def compress[A](xs: List[A]): List[A] = {
+  def compress[A](xs: List[A]) = {
     def go[A](acc: List[A], xs: List[A]): List[A] = xs match {
       case Nil => reverse(acc)
       case h::t => acc match {
@@ -70,7 +70,7 @@ object Lists {
     go (List(), xs)
   }
 
-  def pack[A](xs: List[A]): List[List[A]] = {
+  def pack[A](xs: List[A]) = {
     def go[A](acc: List[List[A]], xs: List[A]): List[List[A]] = xs match {
       case Nil => reverse(acc)
       case h::t =>
@@ -81,5 +81,14 @@ object Lists {
         }
     }
     go (List(),xs)
+  }
+
+  def encode[A](xs: List[A]) = {
+    def add (e: A, a: List[(Int,A)]) = a match {
+      case Nil => (1,e)::a
+      case (n,v)::as => if (v == e) (n+1,v)::as else (1,e)::a
+    }
+
+    xs.foldRight(List[(Int,A)]())(add)
   }
 }
