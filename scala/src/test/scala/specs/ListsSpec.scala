@@ -3,6 +3,7 @@ package specs
 import org.scalacheck._
 import Prop.forAll
 
+// Here we test against default implementations
 object ListsSpec extends Properties("List") {
   import problems.Lists._
 
@@ -32,4 +33,11 @@ object ListsSpec extends Properties("List") {
     }
   }
 
+  property("length") = forAll { l: List[Int] =>
+    length(l) == l.length
+  }
+
+  property("reverse") = forAll { l: List[Int] =>
+    reverse(l) == l.reverse
+  }
 }
