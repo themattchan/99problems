@@ -87,4 +87,10 @@ object Lists {
     encode(xs) map { case (n,c) => if (n == 1) c else (n,c) }
   }
 
+  def decode[A](xs: List[(Int,A)]) = {
+    def replicate[A](e: A, n: Int) =
+      if (n <= 0) List() else e :: replicate(e,n-1)
+
+    xs flatMap { case (n, c) => replicate(c, n)}
+  }
 }
