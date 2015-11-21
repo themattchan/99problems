@@ -45,6 +45,7 @@ object Lists {
   def isPalindrome[A](xs: List[A]): Boolean =
     xs == reverse(xs)
 
+  // xs flatMap identity
   def flatten[A](xss: List[List[A]]) = {
     def addAll[A](toAdd: List[A], acc: List[A]): List[A] = toAdd match {
       case Nil => acc
@@ -79,18 +80,24 @@ object Lists {
     xs.foldRight(List[List[A]]())(group)
   }
 
-  def encode[A](xs: List[A]) = {
+  def encode[A](xs: List[A]) =
     pack(xs) map { g => (g.length, g.head) }
-  }
 
-  def encodeModified[A](xs: List[A]) = {
+  def encodeModified[A](xs: List[A]) =
     encode(xs) map { case (n,c) => if (n == 1) c else (n,c) }
-  }
 
-  def decode[A](xs: List[(Int,A)]) = {
-    def replicate[A](e: A, n: Int) =
-      if (n <= 0) List() else e :: replicate(e,n-1)
+  def encodeDirect[A](xs: List[A]) = ???
 
-    xs flatMap { case (n, c) => replicate(c, n)}
-  }
+  def replicate[A](e: A, n: Int): List[A] =
+    if (n <= 0) List() else e :: replicate(e,n-1)
+
+  def decode[A](xs: List[(Int,A)]) =
+    xs flatMap { case (n, c) => replicate(c, n) }
+
+  def duplicate[A](xs: List[A]) =
+    xs flatMap (replicate(_,2))
+
+  def duplicateN[A](n: Int, xs: List[A]) =
+    xs flatMap (replicate(_,n))
+
 }
