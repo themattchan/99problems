@@ -1,9 +1,7 @@
 99 Problems
 ===========
 
-Functional programming practice, first in Scala (OCaml next, if I'm still
-bothered to translate this...).
-
+Functional programming practice, in Scala.
 Goals:
 
 1. Learn how to organize/build/maintain a Scala project
@@ -11,7 +9,11 @@ Goals:
 3. Learn Scala's fusion OOP/Functional style.
 
 
-Also:  Figure out how to do purely functional graphs
+Also:
+
++ Figure out how to do purely functional graphs
++ Other languages: OCaml, Coq, Scheme
+
 
 ## Reference solutions
 
