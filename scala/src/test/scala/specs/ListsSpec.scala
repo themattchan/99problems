@@ -26,10 +26,8 @@ object ListsSpec extends Properties("List") {
   property("nth") = forAll { (l: List[Int], n: Int) =>
     if (n < l.length && n >=0) {
       nth(n,l) == l(n)
-    } else if (n < 0) {
-      Prop.throws(classOf[IndexOutOfBoundsException]) {  nth(n,l)  }
     } else {
-      Prop.throws(classOf[Exception]) {  nth(n,l)  }
+      Prop.throws(classOf[IndexOutOfBoundsException]) {  nth(n,l)  }
     }
   }
 
@@ -39,5 +37,17 @@ object ListsSpec extends Properties("List") {
 
   property("reverse") = forAll { l: List[Int] =>
     reverse(l) == l.reverse
+  }
+
+  property("flatten") = forAll { l: List[List[Int]] =>
+    flatten(l) == l.flatten
+  }
+
+  property("compress") = forAll { l: List[Int] =>
+    compress(l) == l.distinct
+  }
+
+  property("pack") = forAll { l: List[Int] =>
+    l == flatten(pack(l))
   }
 }

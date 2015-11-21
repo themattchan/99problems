@@ -23,9 +23,9 @@ object Lists {
   }
 
   def nth[A](n: Int, xs: List[A]): A =
-    if (n < 0) throw new IndexOutOfBoundsException()
+    if (n < 0) throw new IndexOutOfBoundsException("negative")
     else xs match {
-      case Nil => throw new Exception("empty")
+      case Nil => throw new IndexOutOfBoundsException("empty")
       case x::xs => if (n == 0) x else nth(n-1, xs)
     }
 
@@ -62,7 +62,10 @@ object Lists {
   def compress[A](xs: List[A]): List[A] = {
     def go[A](acc: List[A], xs: List[A]): List[A] = xs match {
       case Nil => reverse(acc)
-      case h::t => if (h == acc.head) { go (acc, t) } else { go (h::acc,t) }
+      case h::t => acc match {
+        case Nil => go (h::acc,t)
+        case a::as => if (h == a) go (acc,t) else go (h::acc, t)
+      }
     }
     go (List(), xs)
   }
